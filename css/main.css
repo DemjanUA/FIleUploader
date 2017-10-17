@@ -1,0 +1,361 @@
+@import 'font-awesome/css/font-awesome.min.css';
+@keyframes deletingAnimation {
+    0% {
+         opacity: 1;
+         transform: translateY(0);
+    }
+    50% {
+        opacity: 0;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-76px);
+    }
+}
+
+@keyframes nexDeletingAnimation {
+    0% {
+        
+    }
+    50% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-76px);
+    }
+}
+
+
+
+html, body, div, p, ul, li, button, label {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+body {
+    height: 100vh;
+    background: white;
+    font-family: Roboto, sans-serif;
+    color: rgb(116, 128, 157); 
+    overflow: hidden;   
+}
+
+.hide {
+    display: none;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 75px 0 100px;
+    min-height: 590px;
+    background: #6381E6;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+}
+
+.row {
+    display: flex;
+    width: 970px;
+}
+
+.row > div {
+    padding: 0 15px;
+    width: 50%;
+}
+
+.fileuploader {
+    background: white;
+    height: 100%;
+    box-shadow: 0 1px 8px 0 rgba(0,0,0,0.2);
+    border-radius: .25rem;
+    padding: 15px;
+}
+
+.draganddropZone {
+    border: 2px dashed #c2cdda;
+    display: block;
+    height: 100%;
+    background: url('../img/fileuploader-dragdrop-icon-noactive.png') no-repeat center center;
+}
+
+.draganddropZone.active {
+    border-color: #6381E6;
+    background: url('../img/fileuploader-dragdrop-icon.png') no-repeat center center;
+}
+
+.draganddropZone input {
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.fileList ul {
+    overflow-y: scroll;
+    max-height: 415px;
+    padding: 10px 0;
+    background: rgb(250, 251, 253);
+    height: 415px;
+    transform: translateZ(0);
+    border-radius: .25rem;
+    box-shadow: 0 1px 8px 0 rgba(0,0,0,0.2);
+}
+/*ScrollBar rules*/
+.fileList ul::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+.fileList ul::-webkit-scrollbar-button,
+body::-webkit-scrollbar-button {
+    display: none;
+}
+.fileList ul::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+    background: transparent;
+}
+.fileList ul::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+    min-height: 48px;
+    background: #d2d2d2;
+    background-clip: padding-box;
+    border: 3px solid #fff;
+    border-radius: 5px;
+}
+.fileList ul::-webkit-scrollbar-thumb:active,
+body::-webkit-scrollbar-thumb:active {
+    background: #888;
+    border-width: 2px;
+}
+.fileList ul::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    width: 10px;
+}
+/********************/
+.fileList li {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 20px;
+    padding-right: 10px;
+}
+
+.fileList li.deletingAnimation {
+    animation: deletingAnimation .8s ease 0s 1 normal;
+    animation-fill-mode: forwards;
+    transform: translateZ(0);
+}
+
+.fileList li.deletingAnimation ~ li {
+    animation: nexDeletingAnimation .8s ease 0s 1 normal;
+    animation-fill-mode: forwards;
+    transform: translateZ(0);    
+}
+
+.fileList li .icon {
+    display: block;
+    position: relative;
+    height: 36px;
+    min-width: 36px;
+    margin-right: .8em;
+    border-radius: .25rem;
+    text-indent: -9999px;
+    overflow: hidden;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.fileList li .icon::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border-radius: .25rem;
+    background: rgba(0,0,0, .2);
+    opacity: 0;
+    transition: opacity .3s ease;
+}
+
+.fileList li .icon:hover::after {
+    opacity: 1;
+}
+
+.fileList li .fileInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-self: stretch;
+    font-weight: 500;
+    margin-right: 4.5em;
+    font-size: 14px;
+    line-height: 1.2em;
+    flex-grow: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.fileList li .fileInfo > span {
+    display: block;
+}
+
+.fileList li .fileInfo .fileName {
+    font-weight: 500;
+    flex-grow: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.fileList li .fileInfo .size {
+    font-size: 12px;
+    color: #979fb8;
+}
+
+.fileList li button {
+    min-width: 25px;
+    min-height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    background: #6381E6;
+    border: 1px solid white;
+    transition: all .25s ease;
+    outline: none;
+}
+
+.fileList li button i {
+    font-size: 12px;
+    color: white;
+}
+
+.fileList li button:hover {
+    background: #ffefef;
+    border: 1px solid #ffcfcf;
+}
+
+.fileList li button:hover i {
+    color: rgb(245, 149, 149);
+}
+
+.fileList li button:hover > i::before {
+    content: "\f00d";
+}
+
+/****      .fileuploader-popup      ****/
+.fileuploader-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: rgba(40,46,61,.9);
+    z-index: 90;
+    /*
+    **-webkit-animation: fileuploaderFadeIn .4s ease;
+    **animation: fileuploaderFadeIn .4s ease;
+    */
+    display: none;
+}
+
+.fileuploader-popup.active {
+    display: block;
+}
+
+.fileuploader-popup > div {
+    width: 100%;
+    height: 100%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.fileuploader-popup .tools {
+    min-height: 124px;
+    margin-top: 30px;
+}
+
+.fileuploader-popup .tools:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    margin-top: -140px;
+    height: 2000px;
+    background: rgba(35,40,54,.96);
+    -webkit-box-shadow: 0 -2px 10px rgba(0,0,0,.4);
+    box-shadow: 0 -2px 10px rgba(0,0,0,.4);
+    z-index: -1;
+}
+
+.fileuploader-popup .tools .buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.fileuploader-popup .tools .buttons a {
+    display: block;
+    margin: 0 10px;
+    padding: 11px 20px;
+    border: 2px solid #596671;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    outline: 0;
+    transition: all .2s ease-out;
+    -webkit-transition: all .2s ease-out;
+}
+
+.tools .buttons a[data-action="cancel"] {
+    color: #596671;
+}
+
+.tools .buttons a[data-action="cancel"]:hover {
+    background: #e6ebf4;
+    border-color: #e6ebf4;
+    color: #90a0bc;
+    text-decoration: none;
+}
+
+.tools .buttons a[data-action="save"] {
+    color: #fff;
+    background: #6381E6;
+    border-color: #6381E6;  
+}
+
+.tools .buttons a[data-action="save"]:hover {
+    background: #758fe9;
+    border-color: #758fe9;
+    color: #fff;
+    text-decoration: none;
+}
+
+
+.fileuploader-popup .image {
+    background: transparent;
+    flex-grow: 1;
+}
+
+.fileuploader-popup .image img {
+    display: block;
+    line-height: 0;
+    font-size: 0;
+    max-width: 100%;
+    max-height: 100%;
+    color: #47525d;
+    background: #fff;
+    -webkit-box-shadow: 0 0 20px rgba(0,0,0,.4);
+    box-shadow: 0 0 20px rgba(0,0,0,.4);
+    border-radius: 4px;  
+}
