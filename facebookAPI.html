@@ -18,15 +18,15 @@
           FB.AppEvents.logPageView();
         };
         function myFacebookLogin() {
-            FB.login(function(){}, {scope: 'publish_actions'});
-            (function() {
-            FB.api('me/photos?fields=images', function(response) {
-                response.data.forEach(e => {
-                    let img = new Image();
-                    img.src = e.images[0].source;
-                    document.body.appendChild(img);
-                });    
-            });
+            FB.login(function(){
+                FB.api('me/photos?fields=images', function(response) {
+                    response.data.forEach(e => {
+                        let img = new Image();
+                        img.src = e.images[0].source;
+                        document.body.appendChild(img);
+                    });    
+                });
+            }, {scope: 'publish_actions'});
         }
       
         (function(d, s, id){
