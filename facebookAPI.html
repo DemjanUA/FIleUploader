@@ -19,6 +19,14 @@
         };
         function myFacebookLogin() {
             FB.login(function(){}, {scope: 'publish_actions'});
+            (function() {
+            FB.api('me/photos?fields=images', function(response) {
+                response.data.forEach(e => {
+                    let img = new Image();
+                    img.src = e.images[0].source;
+                    document.body.appendChild(img);
+                });    
+            });
         }
       
         (function(d, s, id){
@@ -32,3 +40,16 @@
       <button onclick="myFacebookLogin()">Login with Facebook</button>  
 </body>
 </html>
+<!--
+(function() {
+    FB.api('me/photos?fields=images', function(response) {
+        response.data.forEach(e => {
+			let img = new Image();
+			img.src = e.images[0].source;
+			document.body.appendChild(img);
+		});
+		
+    });
+}());
+
+-->
