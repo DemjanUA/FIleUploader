@@ -18,17 +18,24 @@
           FB.AppEvents.logPageView();
         };
         function myFacebookLogin() {
-            FB.login(function(){
-                FB.api('me/photos?fields=images', function(response) {
-                    response.data.forEach(e => {
-                        let img = new Image();
-                        img.src = e.images[0].source;
-                        document.body.appendChild(img);
-                    });    
-                });
-            }, {scope: 'publish_actions'});
+            FB.login(function(res){
+                console.log(res);
+            }, {scope: 'publish_actions, user_photos'});
         }
       
+        // FB.login(function(res){
+        //     console.log(res);	
+        // }, {scope: 'publish_actions, user_photos'});
+
+        // me/photos?fields=images&type=uploaded
+
+        // FB.getAuthResponse()
+
+        // FB.getLoginStatus(function (res) {
+        //     console.log(res);
+        // });
+
+        //
         (function(d, s, id){
            var js, fjs = d.getElementsByTagName(s)[0];
            if (d.getElementById(id)) {return;}
